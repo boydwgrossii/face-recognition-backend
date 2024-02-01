@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class Signin extends React.Component {
   constructor(props) {
     super(props);
@@ -8,6 +7,7 @@ class Signin extends React.Component {
       signInEmail: '',
       signInPassword: ''
     }
+  }
 
   onEmailChange = (event) => {
     this.setState({signInEmail: event.target.value})
@@ -18,25 +18,22 @@ class Signin extends React.Component {
   }
 
   onSubmitSignIn = () => {
-    console.log(this.state);
-    this.props.onRouteChange('home');
-    // fetch('http://localhost:3000/signin', {
-    //   method: 'post',
-    //   headers: {'Content-Type': 'application/json'},
-    //   body: JSON.stringify({
-    //     email: this.state.signInEmail,
-    //     password: this.state.signInPassword
-    //   })
-    // })
-    //   .then(response => response.json())
-    //   .then(user => {
-    //     if (user.id) {
-    //       this.props.loadUser(user)
-    //       this.props.onRouteChange('home');
-    //     }
-    //   })
+    fetch('http://localhost:3000/signin', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        email: this.state.signInEmail,
+        password: this.state.signInPassword
+      })
+    })
+      .then(response => response.json())
+      .then(user => {
+        if (user.id) {
+          this.props.loadUser(user)
+          this.props.onRouteChange('home');
+        }
+      })
   }
-    
 
   render() {
     const { onRouteChange } = this.props;
@@ -69,7 +66,7 @@ class Signin extends React.Component {
             </fieldset>
             <div className="">
               <input
-                onClick={this.onSubmitSignIn}
+                onClick={() => onRouteChange('home')}
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
                 value="Sign in"
