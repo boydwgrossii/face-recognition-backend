@@ -103,9 +103,23 @@ class App extends Component {
     fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", returnClarifaiRequestOptions(this.state.input))
       .then(response => response.json())
       .then(response => {
-
+        if (response) {
+          fetch('http://localhost:3000/image/', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              id: this.state.user.id
+            })
+          })
+          .then(response => response.json())
+          .then(count => {
+            this.setState({user: {
+              entries: count
+            }})
+          })
+        }
         this.displayFaceBox(this.calculateFaceLocation(response))
-      })
+        })
       .catch(error => console.log('error calling api: ', error));
   }
 
@@ -137,7 +151,7 @@ class App extends Component {
           : (
             route === 'signin'
             ? <Signin onRouteChange={this.onRouteChange}/>
-            : <Register onRouteChange={this.onRouteChange}/>
+            : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
           )
   }
       </div>
