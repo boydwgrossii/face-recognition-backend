@@ -11,6 +11,8 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import './App.css';
 
+console.log('log1', name);
+
 const returnClarifaiRequestOptions = (imageUrl) => {
     // Your PAT (Personal Access Token) can be found in the portal under Authentification
     const PAT = 'e6d40c13b96640aeaf443dbf45b50419';
@@ -48,6 +50,7 @@ const returnClarifaiRequestOptions = (imageUrl) => {
 return requestOptions
 }
 
+console.log('app-preapp', name);
 class App extends Component {
   constructor() {
     super();
@@ -155,9 +158,9 @@ class App extends Component {
             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
           )
   }
+  console.log('app-postrender', name);
       </div>
     );
-    console.log('log5', name);
   }
 }
 

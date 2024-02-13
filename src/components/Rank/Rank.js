@@ -1,5 +1,6 @@
 import React from 'react';
 
+console.log('rank1', name);
 const Rank = ({ name, entries }) => {
   return (
     <div>
@@ -11,6 +12,7 @@ const Rank = ({ name, entries }) => {
       </div>
     </div>
   );
+  console.log('rank2', name);
 }
 
 export default Rank;
