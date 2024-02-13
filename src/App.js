@@ -11,22 +11,6 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import './App.css';
 
-const initialState = {
-  input: '',
-  imageUrl: '',
-  box: {},
-  route: 'signin',
-  isSignedIn: false,
-  user: {
-    id: '',
-    name: '',
-    email: '',
-    entries: 0,
-    joined: ''
-  }
-}
-
-
 const returnClarifaiRequestOptions = (imageUrl) => {
     // Your PAT (Personal Access Token) can be found in the portal under Authentification
     const PAT = 'e6d40c13b96640aeaf443dbf45b50419';
@@ -139,22 +123,12 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState(initialState)
+      this.setState({isSignedIn: false})
     } else if (route === 'home') {
       this.setState({isSignedIn: true})
     }
     this.setState({route: route});
   }
-
-
-  // onRouteChange = (route) => {
-  //   if (route === 'signout') {
-  //     this.setState({isSignedIn: false})
-  //   } else if (route === 'home') {
-  //     this.setState({isSignedIn: true})
-  //   }
-  //   this.setState({route: route});
-  // }
 
   render() {
     const { isSignedIn, imageUrl, route, box } = this.state;
@@ -183,6 +157,7 @@ class App extends Component {
   }
       </div>
     );
+    console.log('log5', name);
   }
 }
 
